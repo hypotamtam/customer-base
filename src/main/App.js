@@ -14,7 +14,6 @@ export class AppComponent extends Component {
   }
 
   render() {
-    console.log(this.props.users)
     return (
       <div className="App">
         <header className="App-header">
