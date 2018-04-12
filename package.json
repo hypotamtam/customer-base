@@ -5,9 +5,11 @@
   "dependencies": {
     "ajv-keywords": "^3.1.0",
     "firebase": "^4.12.1",
+    "moment": "^2.22.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
+    "react-dates": "^16.5.0",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.0.6",
@@ -27,5 +29,12 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "jest-enzyme": "^6.0.0",
     "react-test-renderer": "^16.3.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/main/components/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
+    ]
   }
 }

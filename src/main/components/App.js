@@ -6,12 +6,26 @@ import { connect } from 'react-redux'
 import {firestoreConnect, isLoaded, isEmpty} from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 import {Label, Panel} from "react-bootstrap";
+import Users from "./Users";
 
 export class AppComponent extends Component {
 
   static propTypes = {
     users: PropTypes.array
   }
+
+  createUsersComponent() {
+    const users = this.props.users;
+    if (!isLoaded(users)) {
+      return <h1><Label bsStyle="info">Loading</Label></h1>
+    }
+    if (isEmpty(users)) {
+      return <h1><Label bsStyle="info">No user founds</Label></h1>
+    }
+
+    return <Users users={users}/>
+  }
+
 
   render() {
     return (
@@ -21,16 +35,7 @@ export class AppComponent extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-body">
-          {!isLoaded(this.props.users) ? <Label bsStyle="info">Loading</Label> : isEmpty(this.props.users) ? <Label bsStyle="info">No user founds</Label> :
-            this.props.users.map(user =>
-              <Panel key={user.id}>
-                <Panel.Body>
-                  <Label bsStyle="success" >{JSON.stringify(user, null, 2)}</Label>
-                </Panel.Body>
-              </Panel>
-
-            )
-          }
+          {this.createUsersComponent()}
         </div>
       </div>
     );
