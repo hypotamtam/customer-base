@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import {firestoreConnect, isLoaded, isEmpty} from 'react-redux-firebase'
 import PropTypes from 'prop-types'
+import {Label, Panel} from "react-bootstrap";
 
 export class AppComponent extends Component {
 
@@ -20,11 +21,18 @@ export class AppComponent extends Component {
           <img src={logo} className="App-logo" alt="logo"/>
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        {!isLoaded(this.props.users) ? <p className="App-intro">Loading</p> : isEmpty(this.props.users) ? <p className="App-intro">No user founds</p> :
-          this.props.users.map(user =>
-            <p className="App-intro" key={user.id}>{JSON.stringify(user)}</p>
-          )
-        }
+        <div className="App-body">
+          {!isLoaded(this.props.users) ? <Label bsStyle="info">Loading</Label> : isEmpty(this.props.users) ? <Label bsStyle="info">No user founds</Label> :
+            this.props.users.map(user =>
+              <Panel key={user.id}>
+                <Panel.Body>
+                  <Label bsStyle="success" >{JSON.stringify(user, null, 2)}</Label>
+                </Panel.Body>
+              </Panel>
+
+            )
+          }
+        </div>
       </div>
     );
   }
