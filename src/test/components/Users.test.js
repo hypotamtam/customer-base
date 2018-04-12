@@ -8,13 +8,13 @@ describe("<Users /> should ", () => {
 
   it('render all users', () => {
     const usersWrapper = mount(<Users users={users}/>)
-    expect(usersWrapper.find(User)).toHaveLength(users.length);
+    expect(usersWrapper.find(User)).toHaveLength(users.length)
   })
 
   it('keep the user order', () => {
     const usersWrapper = shallow(<Users users={users}/>)
     usersWrapper.find(User).forEach((userNode, index) => {
-      expect(userNode.props().user).toBe(users[index]);
+      expect(userNode.props().user).toBe(users[index])
     })
   })
 })
