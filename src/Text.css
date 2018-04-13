@@ -1,0 +1,10 @@
+.category-title {
+  top: 20px;
+  left: 20px;
+  bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

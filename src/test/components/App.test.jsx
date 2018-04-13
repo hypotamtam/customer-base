@@ -7,7 +7,7 @@ import usersData from '../data/usersData'
 
 
 describe('<App /> should ', () => {
-  it('render the users list', () => {
+  it('render the user list', () => {
     const appWrapper = shallow(<AppComponent users={usersData} />)
     console.log(appWrapper.debug())
     expect(appWrapper.find(Users)).toExist()

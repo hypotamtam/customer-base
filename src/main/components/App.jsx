@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect, isEmpty, isLoaded } from 'react-redux-firebase'
-import { Label } from 'react-bootstrap'
 import logo from './logo.svg'
 import './App.css'
 import Users from './Users'
@@ -13,10 +12,10 @@ export class AppComponent extends Component {
   createUsersComponent() {
     const { users } = this.props
     if (!isLoaded(users)) {
-      return <h1><Label bsStyle="info">Loading</Label></h1>
+      return <h1 className="App-message"><span className="badge badge-pill badge-info">Loading</span></h1>
     }
     if (isEmpty(users)) {
-      return <h1><Label bsStyle="info">No user founds</Label></h1>
+      return <h1 className="App-message"><span className="badge badge-pill badge-info">No user founds</span></h1>
     }
 
     return <Users users={users} />

@@ -1,0 +1,35 @@
+.User-header :first-child {
+  font-size: 18px;
+}
+
+.User-header p {
+  font-size: 16px;
+}
+
+.User-info p {
+  margin-bottom: 5px;
+}
+
+.User-info p:last-child {
+  margin-bottom: 0px;
+}
+
+.User-info .badge {
+  padding: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.User-info .badge svg {
+  padding-right: 5px;
+}
+
+
+.User-info span:not(.badge){
+  font-size: 16px;
+}
+
+
+.User-info span:not(.badge :first-child) {
+  padding-left: 10px;
+}
