@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import configureStore from './main/store'
-import registerServiceWorker from './main/registerServiceWorker';
-import App from "./main/components/App";
+import registerServiceWorker from './main/registerServiceWorker'
+import './index.css'
+import App from './main/components/App'
 
 
-registerServiceWorker();
+registerServiceWorker()
 
 const store = configureStore()
 
