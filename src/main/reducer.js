@@ -5,13 +5,13 @@ import { SELECT_USER_ACTION } from './actions/selectUser'
 
 const selectedUserReducer = (state = null, action) => {
   if (action.type === SELECT_USER_ACTION) {
-    return { ...action.user }
+    return { value: action.userId }
   }
   return state
 }
 
 const rootReducer = combineReducers({
-  selectedUser: selectedUserReducer,
+  selectedUserId: selectedUserReducer,
   firebase: firebaseReducer,
   firestore: firestoreReducer
 })

@@ -14,7 +14,7 @@ const User = ({ user }) => {
         <p className="text-capitalize">
           <strong>{user.name.firstName} {user.name.lastName}</strong> <em className="badge badge-light">{user.status}</em>
         </p>
-        <p className="text-lowercase"> Created {userCreationDate.calendar()} </p>
+        <p className="text-lowercase"> <em> Created {userCreationDate.calendar()} </em> </p>
       </div>
       <div className="User-info float-right">
         <p className="text-lowercase">

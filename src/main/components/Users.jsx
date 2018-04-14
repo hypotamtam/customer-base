@@ -9,10 +9,10 @@ import selectUser from '../actions/selectUser'
 
 export class UsersComponent extends Component {
   createUserComponent(user) {
-    const { selectedUser, onUserSelected } = this.props
-    const cssClasses = (selectedUser && user.id === selectedUser.id) ? 'active list-group-item' : 'list-group-item'
+    const { selectedUserId, onUserSelected } = this.props
+    const cssClasses = (selectedUserId && user.id === selectedUserId) ? 'active list-group-item' : 'list-group-item'
     return (
-      <li className={cssClasses} onClick={() => onUserSelected(user)} key={user.id}>
+      <li className={cssClasses} onClick={() => onUserSelected(user.id)} key={user.id}>
         <User user={user} />
       </li>)
   }
@@ -20,7 +20,6 @@ export class UsersComponent extends Component {
   render() {
     return (
       <div id="users">
-        <div className="category-title text-uppercase"><strong>User list</strong></div>
         <ul className="list-group">
           {this.props.users.map(user => this.createUserComponent(user))}
         </ul>
@@ -29,22 +28,22 @@ export class UsersComponent extends Component {
 }
 
 UsersComponent.defaultProps = {
-  selectedUser: undefined,
+  selectedUserId: undefined,
   onUserSelected: () => {}
 }
 
 UsersComponent.propTypes = {
   users: PropTypes.arrayOf(userPropTypes).isRequired,
-  selectedUser: userPropTypes,
+  selectedUserId: PropTypes.string,
   onUserSelected: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-  selectedUser: state.selectedUser
+  selectedUserId: state.selectedUserId
 })
 
 const mapDispatchToProps = dispatch => ({
-  onUserSelected: user => dispatch(selectUser(user))
+  onUserSelected: userId => dispatch(selectUser(userId))
 })
 
 const Users = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)

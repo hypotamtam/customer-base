@@ -7,11 +7,11 @@ import logo from './logo.svg'
 import './App.css'
 import Users from './Users'
 import userPropTypes from '../userPropTypes'
-import UserDetail from "./UserDetail";
+import UserDetail from './UserDetail'
 
 export class AppComponent extends Component {
   createUsersComponent() {
-    const { users, selectedUser } = this.props
+    const { users, selectedUserId } = this.props
     if (!isLoaded(users)) {
       return <h1 className="App-message"><span className="badge badge-pill badge-info">Loading</span></h1>
     }
@@ -19,6 +19,7 @@ export class AppComponent extends Component {
       return <h1 className="App-message"><span className="badge badge-pill badge-info">No user founds</span></h1>
     }
 
+    const selectedUser = selectedUserId && users.find(user => user.id === selectedUserId)
     return (
       <div className="container">
         <div className="row">
@@ -54,17 +55,17 @@ export class AppComponent extends Component {
 
 AppComponent.defaultProps = {
   users: undefined,
-  selectedUser: undefined
+  selectedUserId: undefined
 }
 
 AppComponent.propTypes = {
   users: PropTypes.arrayOf(userPropTypes),
-  selectedUser: userPropTypes
+  selectedUserId: PropTypes.string
 }
 
 const mapStateToProps = state => ({
   users: state.firestore.ordered.users,
-  selectedUser: state.selectedUser
+  selectedUserId: state.selectedUserId && state.selectedUserId.value
 })
 
 const App = compose(

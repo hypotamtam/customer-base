@@ -28,7 +28,7 @@ describe('<App /> should ', () => {
   })
 
   it('display the user\'s detail of the selected user', () => {
-    const appWrapper = shallow(<AppComponent users={usersData} selectedUser={usersData[1]} />)
+    const appWrapper = shallow(<AppComponent users={usersData} selectedUserId={usersData[1].id} />)
     const userDetailWrapper = appWrapper.find(UserDetail)
     expect(userDetailWrapper).toExist()
     expect(userDetailWrapper.props().user).toBe(usersData[1])

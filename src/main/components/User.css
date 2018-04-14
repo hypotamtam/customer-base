@@ -1,9 +1,9 @@
 .User-header :first-child {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .User-header p {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .User-info p {
@@ -16,7 +16,7 @@
 
 .User-info .badge {
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
 }
 
@@ -26,7 +26,7 @@
 
 
 .User-info span:not(.badge){
-  font-size: 16px;
+  font-size: 14px;
 }
 
 

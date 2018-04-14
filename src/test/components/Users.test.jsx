@@ -18,16 +18,15 @@ describe('<Users /> should ', () => {
   })
 
   it('fire the onUserSelected when we click on a user', () => {
-    let selectedUser = {}
-    const usersWrapper = shallow(<UsersComponent users={usersData} onUserSelected={(user) => { selectedUser = user }} />)
+    let selectedUserId = {}
+    const usersWrapper = shallow(<UsersComponent users={usersData} onUserSelected={(userId) => { selectedUserId = userId }} />)
     usersWrapper.find(User).first().parent().simulate('click')
-    expect(selectedUser).toBe(usersData[0])
+    expect(selectedUserId).toBe(usersData[0].id)
   })
 
   it('highlights the selected user', () => {
-    const usersWrapper = shallow(<UsersComponent users={usersData} selectedUser={usersData[0]} />)
+    const usersWrapper = shallow(<UsersComponent users={usersData} selectedUserId={usersData[0].id} />)
     const selectedUserWrapper = usersWrapper.find(User).first().parent()
-    console.log(selectedUserWrapper.debug())
     expect(selectedUserWrapper.hasClass('active')).toEqual(true)
   })
 })
