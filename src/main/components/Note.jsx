@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 class Note extends Component {
 
   static WAIT_INTERVAL = 500;
-  static ENTER_KEY = 13;
 
   constructor(props) {
     super(props);

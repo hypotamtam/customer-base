@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import './UserDetail.css'
 import userPropTypes from '../userPropTypes'
 import Note from './Note'
+import ContactDetail from "./ContactDetail";
 
 export class UserDetailComponent extends Component {
   createStatusButton(value) {
@@ -30,15 +31,6 @@ export class UserDetailComponent extends Component {
     )
   }
 
-  createContactDetail(key, value) {
-    return (
-      <div className="row">
-        <div className="col-3 UserDetail-contact-detail"><strong>{key}</strong></div>
-        <div className="col-7 UserDetail-contact-detail p-0">{value}</div>
-      </div>
-    )
-  }
-
   createContactDetails() {
     const { contactDetails } = this.props.user
     const contactDetailCouples = Object.entries(contactDetails).reduce((previousValue, currentValue, currentIndex) => {
@@ -54,11 +46,11 @@ export class UserDetailComponent extends Component {
         {contactDetailCouples.map((contactDetailCouple, index) => (
           <div className="row" key={index}>
             <div className="col-6">
-              {this.createContactDetail(contactDetailCouple[0][0], contactDetailCouple[0][1])}
+              <ContactDetail type={contactDetailCouple[0][0]} value={contactDetailCouple[0][1]} />
             </div>
             {contactDetailCouple[1] && (
               <div className="col-6">
-                {this.createContactDetail(contactDetailCouple[1][0], contactDetailCouple[1][1])}
+                <ContactDetail type={contactDetailCouple[1][0]} value={contactDetailCouple[1][1]} />
               </div>
             )}
           </div>))}
@@ -88,10 +80,10 @@ export class UserDetailComponent extends Component {
           <h4 className="card-title UserDetail-category-title">Contact details</h4>
           {this.createContactDetails()}
           <h4 className="card-title UserDetail-category-title">Notes</h4>
-          {user.notes.map((note, index) => <Note note={note} onInputChange={value => this.props.updateNote(value, index)} />)}
+          {user.notes.map((note, index) => <Note key={index} note={note} onInputChange={value => this.props.updateNote(value, index)} />)}
         </div>
         <div className="m-3">
-          <button className="btn btn-primary pull-right" onClick={this.props.addNote}> Add note</button>
+          <button id="AddNoteBtn" className="btn btn-primary pull-right" onClick={this.props.addNote}> Add note</button>
         </div>
       </div>
     )

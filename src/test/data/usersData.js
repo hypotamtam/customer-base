@@ -9,7 +9,9 @@ export default [
       firstName: 'Claire',
       lastName: 'Cassany'
     },
-    notes: [],
+    notes: [
+      'first note'
+    ],
     status: 'prospective'
   },
   {
@@ -25,7 +27,8 @@ export default [
       lastName: 'Cassany'
     },
     notes: [
-      'Interesting developper'
+      'note 1',
+      'note 2'
     ],
     status: 'current'
   },
