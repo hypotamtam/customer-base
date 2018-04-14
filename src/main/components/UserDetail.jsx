@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import './UserDetail.css'
 import userPropTypes from '../userPropTypes'
 import Note from './Note'
-import ContactDetail from "./ContactDetail";
+import ContactDetail from './ContactDetail'
 
 export class UserDetailComponent extends Component {
   createStatusButton(value) {
@@ -33,11 +33,11 @@ export class UserDetailComponent extends Component {
 
   createContactDetails() {
     const { contactDetails } = this.props.user
-    const contactDetailCouples = Object.entries(contactDetails).reduce((previousValue, currentValue, currentIndex) => {
+    const contactDetailCouples = Object.keys(contactDetails).reduce((previousValue, currentKey, currentIndex) => {
       if (currentIndex % 2 === 0) {
-        previousValue.push([currentValue])
+        previousValue.push({ left: [currentKey, contactDetails[currentKey]] })
       } else {
-        previousValue[previousValue.length - 1].push(currentValue)
+        previousValue[previousValue.length - 1].right = [currentKey, contactDetails[currentKey]]
       }
       return previousValue
     }, [])
@@ -46,11 +46,11 @@ export class UserDetailComponent extends Component {
         {contactDetailCouples.map((contactDetailCouple, index) => (
           <div className="row" key={index}>
             <div className="col-6">
-              <ContactDetail type={contactDetailCouple[0][0]} value={contactDetailCouple[0][1]} />
+              <ContactDetail type={contactDetailCouple.left[0]} value={contactDetailCouple.left[1]} />
             </div>
-            {contactDetailCouple[1] && (
+            {contactDetailCouple.right && (
               <div className="col-6">
-                <ContactDetail type={contactDetailCouple[1][0]} value={contactDetailCouple[1][1]} />
+                <ContactDetail type={contactDetailCouple.right[0]} value={contactDetailCouple.right[1]} />
               </div>
             )}
           </div>))}
