@@ -13,7 +13,7 @@ import {
 import { UPDATE_SORT_ACTION } from './actions/updateSort'
 import { UPDATE_FILTER_ACTION } from './actions/updateFilter'
 
-const selectedUserReducer = (state = null, action) => {
+export const selectedUserReducer = (state = null, action) => {
   if (action.type === SELECT_USER_ACTION) {
     return { ...state, value: action.userId }
   }
@@ -21,31 +21,34 @@ const selectedUserReducer = (state = null, action) => {
 }
 
 
-const filterUpdateReducer = (state = { text: null, status: null }, action) => {
+export const filterUpdateReducer = (state = { text: null, status: null }, action) => {
   if (action.type !== UPDATE_FILTER_ACTION) {
     return state
   }
 
-  const { text, status } = action.filter
-  let userFilter = () => true
-  if (text || status) {
-    userFilter = (user) => {
-      let shouldKeepUser = status ? user.status === status : false
-      if (text) {
-        shouldKeepUser = shouldKeepUser || (user.name.firstName.match(text) != null)
-          || (user.name.lastName.match(text) != null)
-          || (user.id.match(text) != null)
-          || user.notes.find(note => note.match(text) != null) !== undefined
-          || Object.values(user.contactDetails).find(value => value.match(text) != null) !== undefined
-      }
-      return shouldKeepUser
-    }
-  }
+  if (action.filter) {
+    const { text, status } = action.filter
 
-  return { ...action.filter, userFilter }
+    let userFilter = () => true
+    if (text || status) {
+      userFilter = (user) => {
+        let shouldKeepUser = status ? user.status === status : false
+        if (text) {
+          shouldKeepUser = shouldKeepUser || (user.name.firstName.match(text) != null)
+            || (user.name.lastName.match(text) != null)
+            || (user.id.match(text) != null)
+            || user.notes.find(note => note.match(text) != null) !== undefined
+            || Object.values(user.contactDetails).find(value => value.match(text) != null) !== undefined
+        }
+        return shouldKeepUser
+      }
+    }
+
+    return { ...action.filter, userFilter }
+  }
 }
 
-const sortUpdateReducer = (state = { field: SORT_FIELD_NAME, order: SORT_ORDER_ASC }, action) => {
+export const sortUpdateReducer = (state = { field: SORT_FIELD_NAME, order: SORT_ORDER_ASC }, action) => {
   if (action.type !== UPDATE_SORT_ACTION) {
     return state
   }

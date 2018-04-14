@@ -22,7 +22,7 @@ export class HeaderComponent extends Component {
     const dscBtnClass = isAsc ? unselectStatusClass : selectStatusClass
     return (
       <div>
-        <div className="dropdown d-inline-block">
+        <div id="SortField" className="dropdown d-inline-block">
           <button className="btn btn-primary btn-lg dropdown-toggle" id="dropdownSort" data-toggle="dropdown">
             {this.props.sort.field}
           </button>
@@ -36,7 +36,7 @@ export class HeaderComponent extends Component {
             </a>))}
           </div>
         </div>
-        <div className="btn-group btn-group-toggle ml-3 d-inline-block">
+        <div id="SortOrder" className="btn-group btn-group-toggle ml-3 d-inline-block">
           <button type="button" className={dscBtnClass} onClick={() => this.props.onUpdateSort({ ...sort, order: SORT_ORDER_DSC })}>
             <Fa.FaArrowDown className="w-75 h-75" />
           </button>
@@ -53,12 +53,9 @@ export class HeaderComponent extends Component {
     return (
       <div>
         <div className="Header-search ml-3">
-          <Input placeholder="Search users" value={text} onInputChange={value => {
-            console.log(value)
-            this.props.onUpdateFilter({ status, text: value })
-          }}/>
+          <Input placeholder="Search users" value={text} onInputChange={value => this.props.onUpdateFilter({ status, text: value })} />
         </div>
-        <div className="dropdown d-inline-block ml-3">
+        <div id="FilterStatus" className="dropdown d-inline-block ml-3">
           <button className="btn btn-primary btn-lg dropdown-toggle" id="dropdownStatus" data-toggle="dropdown">
             {status ? status : 'Status filter'}
           </button>
