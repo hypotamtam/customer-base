@@ -1,4 +1,4 @@
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/no-array-index-key, import/no-named-as-default */
 import React, { Component } from 'react'
 import { compose } from 'redux'
 import { withFirestore } from 'react-redux-firebase'
@@ -6,6 +6,7 @@ import { withHandlers } from 'recompose'
 import PropTypes from 'prop-types'
 import './UserDetail.css'
 import userPropTypes from '../userPropTypes'
+import Note from './Note'
 
 export class UserDetailComponent extends Component {
   createStatusButton(value) {
@@ -87,14 +88,10 @@ export class UserDetailComponent extends Component {
           <h4 className="card-title UserDetail-category-title">Contact details</h4>
           {this.createContactDetails()}
           <h4 className="card-title UserDetail-category-title">Notes</h4>
-          {user.notes.map((note, index) => (
-            <h4 key={index}>
-              <textarea className="border UserDetail-note w-100" value={note} />
-            </h4>
-          ))}
+          {user.notes.map((note, index) => <Note note={note} onInputChange={value => this.props.updateNote(value, index)} />)}
         </div>
         <div className="m-3">
-          <button className="btn btn-primary pull-right"> Add note</button>
+          <button className="btn btn-primary pull-right" onClick={this.props.addNote}> Add note</button>
         </div>
       </div>
     )
@@ -104,12 +101,18 @@ export class UserDetailComponent extends Component {
 UserDetailComponent.defaultProps = {
   updateStatus: () => {
   },
+  updateNote: () => {
+  },
+  addNote: () => {
+  },
   firestore: undefined
 }
 
 UserDetailComponent.propTypes = {
   user: userPropTypes.isRequired,
   updateStatus: PropTypes.func,
+  updateNote: PropTypes.func,
+  addNote: PropTypes.func,
   firestore: PropTypes.shape({ // from enhnace (withFirestore)
     update: PropTypes.func.isRequired
   })
@@ -118,8 +121,16 @@ UserDetailComponent.propTypes = {
 const UserDetail = compose(
   withFirestore,
   withHandlers({
-    updateStatus: props => status =>
-      props.firestore.update({ collection: 'users', doc: props.user.id }, { ...props.user, status })
+    updateStatus: props => status => props.firestore.update({ collection: 'users', doc: props.user.id }, { ...props.user, status }),
+    updateNote: props => (note, index) => {
+      const newNotes = [...props.user.notes]
+      newNotes[index] = note
+      props.firestore.update({ collection: 'users', doc: props.user.id }, { ...props.user, notes: newNotes })
+    },
+    addNote: props => () => {
+      const newUser = { ...props.user, notes: [...props.user.notes, ''] }
+      props.firestore.update({ collection: 'users', doc: props.user.id }, newUser)
+    }
   })
 )(UserDetailComponent)
 

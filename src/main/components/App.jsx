@@ -44,9 +44,7 @@ export class AppComponent extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-body">
-
           {this.createUsersComponent()}
-
         </div>
       </div>
     )
