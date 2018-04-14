@@ -34,5 +34,4 @@ describe('<App /> should ', () => {
     expect(userDetailWrapper.props().user).toBe(usersData[1])
   })
 
-
 })

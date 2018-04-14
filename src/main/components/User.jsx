@@ -12,7 +12,7 @@ const User = ({ user }) => {
     <div className="User">
       <div className="User-header pull-left">
         <p className="text-capitalize">
-          <strong>{user.name.firstName} {user.name.lastName}</strong>
+          <strong>{user.name.firstName} {user.name.lastName}</strong> <em className="badge badge-light">{user.status}</em>
         </p>
         <p className="text-lowercase"> Created {userCreationDate.calendar()} </p>
       </div>
