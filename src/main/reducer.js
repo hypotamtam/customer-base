@@ -2,14 +2,47 @@ import { combineReducers } from 'redux'
 import { firebaseReducer } from 'react-redux-firebase'
 import { firestoreReducer } from 'redux-firestore'
 import { SELECT_USER_ACTION } from './actions/selectUser'
-import { SORT_FIELD_CONTACT_DETAILS, SORT_FIELD_NAME, SORT_FIELD_NOTES, SORT_FIELD_STATUS, SORT_ORDER_ASC } from './types/sortPropTypes'
+import {
+  SORT_FIELD_CONTACT_DETAILS,
+  SORT_FIELD_CREATION,
+  SORT_FIELD_NAME,
+  SORT_FIELD_NOTES,
+  SORT_FIELD_STATUS,
+  SORT_ORDER_ASC
+} from './types/sortPropTypes'
 import { UPDATE_SORT_ACTION } from './actions/updateSort'
+import { UPDATE_FILTER_ACTION } from './actions/updateFilter'
 
 const selectedUserReducer = (state = null, action) => {
   if (action.type === SELECT_USER_ACTION) {
     return { ...state, value: action.userId }
   }
   return state
+}
+
+
+const filterUpdateReducer = (state = { text: null, status: null }, action) => {
+  if (action.type !== UPDATE_FILTER_ACTION) {
+    return state
+  }
+
+  const { text, status } = action.filter
+  let userFilter = () => true
+  if (text || status) {
+    userFilter = (user) => {
+      let shouldKeepUser = status ? user.status === status : false
+      if (text) {
+        shouldKeepUser = shouldKeepUser || (user.name.firstName.match(text) != null)
+          || (user.name.lastName.match(text) != null)
+          || (user.id.match(text) != null)
+          || user.notes.find(note => note.match(text) != null) !== undefined
+          || Object.values(user.contactDetails).find(value => value.match(text) != null) !== undefined
+      }
+      return shouldKeepUser
+    }
+  }
+
+  return { ...action.filter, userFilter }
 }
 
 const sortUpdateReducer = (state = { field: SORT_FIELD_NAME, order: SORT_ORDER_ASC }, action) => {
@@ -35,11 +68,15 @@ const sortUpdateReducer = (state = { field: SORT_FIELD_NAME, order: SORT_ORDER_A
       const contactDetailsCountB = Object.keys(userB.contactDetails).length
       return isASC ? contactDetailsCountB - contactDetailsCountA : contactDetailsCountA - contactDetailsCountB
     }
+  } else if (action.sort.field === SORT_FIELD_CREATION) {
+    comparator = (userA, userB) => (isASC ? userA.createdAt < userB.createdAt : userA.createdAt > userB.createdAt)
   }
+
   return ({ ...action.sort, userComparator: comparator })
 }
 
 const rootReducer = combineReducers({
+  filter: filterUpdateReducer,
   sort: sortUpdateReducer,
   selectedUserId: selectedUserReducer,
   firebase: firebaseReducer,

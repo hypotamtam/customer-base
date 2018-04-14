@@ -50,7 +50,8 @@ UsersComponent.propTypes = {
 
 const mapStateToProps = state => ({
   selectedUserId: state.selectedUserId && state.selectedUserId.value,
-  userComparator: state.sort.userComparator
+  userComparator: state.sort.userComparator,
+  userFilter: state.filter.userFilter
 })
 
 const mapDispatchToProps = dispatch => ({
