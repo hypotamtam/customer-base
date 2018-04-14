@@ -6,7 +6,9 @@
     "ajv-keywords": "^3.1.0",
     "bootstrap": "^4.1.0",
     "firebase": "^4.12.1",
+    "jquery": "^3.3.1",
     "moment": "^2.22.0",
+    "popper.js": "^1.14.3",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dates": "^16.5.0",
@@ -44,6 +46,7 @@
       "!src/main/registerServiceWorker.js",
       "!src/main/reducer.js",
       "!src/main/store.js",
+      "!src/main/config.js",
       "!<rootDir>/node_modules/",
       "!<rootDir>/path/to/dir/"
     ]

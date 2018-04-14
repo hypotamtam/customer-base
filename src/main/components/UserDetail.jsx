@@ -5,7 +5,7 @@ import { withFirestore } from 'react-redux-firebase'
 import { withHandlers } from 'recompose'
 import PropTypes from 'prop-types'
 import './UserDetail.css'
-import userPropTypes from '../userPropTypes'
+import userPropTypes from '../types/userPropTypes'
 import Note from './Note'
 import ContactDetail from './ContactDetail'
 

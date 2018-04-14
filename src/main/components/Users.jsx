@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import User from './User'
-import userPropTypes from '../userPropTypes'
+import userPropTypes from '../types/userPropTypes'
 import selectUser from '../actions/selectUser'
 
 
@@ -49,7 +49,8 @@ UsersComponent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  selectedUserId: state.selectedUserId && state.selectedUserId.value
+  selectedUserId: state.selectedUserId && state.selectedUserId.value,
+  userComparator: state.sort.userComparator
 })
 
 const mapDispatchToProps = dispatch => ({

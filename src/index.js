@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
 import { Provider } from 'react-redux'
 import configureStore from './main/store'
 import registerServiceWorker from './main/registerServiceWorker'

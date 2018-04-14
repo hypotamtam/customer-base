@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect, isEmpty, isLoaded } from 'react-redux-firebase'
-import logo from './logo.svg'
 import './App.css'
 import Users from './Users'
-import userPropTypes from '../userPropTypes'
+import userPropTypes from '../types/userPropTypes'
 import UserDetail from './UserDetail'
+import Header from "./Header";
 
 export class AppComponent extends Component {
   createUsersComponent() {
@@ -40,8 +40,7 @@ export class AppComponent extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <Header />
         </header>
         <div className="App-body">
           {this.createUsersComponent()}

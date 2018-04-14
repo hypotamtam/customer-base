@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import * as Md from 'react-icons/lib/md'
 import './User.css'
-import userPropTypes from '../userPropTypes'
+import userPropTypes from '../types/userPropTypes'
 
 
 const User = ({ user }) => {
