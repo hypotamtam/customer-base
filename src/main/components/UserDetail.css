@@ -1,4 +1,4 @@
-.category-title {
+.UserDetail-category-title {
   top: 20px;
   left: 20px;
   bottom: 10px;
@@ -9,13 +9,10 @@
   letter-spacing: 1px;
 }
 
-.card-body dt {
-  font-size: 14px;
-}
-.card-body dd {
+.UserDetail-contact-detail {
   font-size: 14px;
 }
 
-.note {
+.UserDetail-note {
   padding: 20px;
 }

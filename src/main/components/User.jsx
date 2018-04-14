@@ -18,10 +18,10 @@ const User = ({ user }) => {
       </div>
       <div className="User-info float-right">
         <p className="text-lowercase">
-          <span className="badge badge-info"><Md.MdComment /> {Object.keys(user.contactDetails).length} </span>
+          <span className="badge badge-info"><Md.MdContactMail /> {Object.keys(user.contactDetails).length} </span>
         </p>
         <p className="text-lowercase">
-          <span className="badge badge-info"><Md.MdContactMail />{user.notes.length}</span>
+          <span className="badge badge-info"><Md.MdComment />{user.notes.length}</span>
         </p>
       </div>
     </div>

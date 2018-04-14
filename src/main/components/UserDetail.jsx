@@ -1,21 +1,39 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react'
 import { compose } from 'redux'
 import { withFirestore } from 'react-redux-firebase'
 import { withHandlers } from 'recompose'
 import PropTypes from 'prop-types'
+import './UserDetail.css'
 import userPropTypes from '../userPropTypes'
 
-
 export class UserDetailComponent extends Component {
-  createStatusButton() {
+  createStatusButton(value) {
     const { status } = this.props.user
     const selectStatusClass = 'btn btn-lg btn-primary'
     const unselectStatusClass = 'btn btn-lg btn-secondary'
+    return (<button
+      type="button"
+      className={value === status ? selectStatusClass : unselectStatusClass}
+      onClick={() => this.props.updateStatus(value)}
+    >{value}</button>)
+  }
+
+  createStatusButtons() {
     return (
       <div className="btn-group btn-group-toggle">
-        <button type="button" className={status === 'prospective' ? selectStatusClass : unselectStatusClass} onClick={() => this.props.updateStatus('prospective')}>prospective</button>
-        <button type="button" className={status === 'current' ? selectStatusClass : unselectStatusClass} onClick={() => this.props.updateStatus('current')}>current</button>
-        <button type="button" className={status === 'non-active' ? selectStatusClass : unselectStatusClass} onClick={() => this.props.updateStatus('non-active')}>non-active</button>
+        {this.createStatusButton('prospective')}
+        {this.createStatusButton('current')}
+        {this.createStatusButton('non-active')}
+      </div>
+    )
+  }
+
+  createContactDetail(key, value) {
+    return (
+      <div className="row">
+        <div className="col-3 UserDetail-contact-detail"><strong>{key}</strong></div>
+        <div className="col-7 UserDetail-contact-detail p-0">{value}</div>
       </div>
     )
   }
@@ -32,17 +50,17 @@ export class UserDetailComponent extends Component {
     }, [])
     return (
       <div>
-        {contactDetailCouples.map(contactDetailCouple => (
-          <dl className="row">
-            <dt className="col-sm-2">{contactDetailCouple[0][0]}</dt>
+        {contactDetailCouples.map((contactDetailCouple, index) => (
+          <div className="row" key={index}>
+            <div className="col-6">
+              {this.createContactDetail(contactDetailCouple[0][0], contactDetailCouple[0][1])}
+            </div>
             {contactDetailCouple[1] && (
-              <dd className="col-10">
-                <dd className="col-sm-5 p-0">{contactDetailCouple[0][1]}</dd>
-                <dt className="col-sm-2">{contactDetailCouple[1][0]}</dt>
-                <dd className="col-sm-5">{contactDetailCouple[1][1]}</dd>
-              </dd>)}
-            {contactDetailCouple[1] === undefined ? <dd className="col-sm-5">{contactDetailCouple[0][1]}</dd> : null}
-          </dl>))}
+              <div className="col-6">
+                {this.createContactDetail(contactDetailCouple[1][0], contactDetailCouple[1][1])}
+              </div>
+            )}
+          </div>))}
 
       </div>
     )
@@ -62,14 +80,18 @@ export class UserDetailComponent extends Component {
             </p>
           </div>
           <div className="pull-right">
-            {this.createStatusButton()}
+            {this.createStatusButtons()}
           </div>
         </div>
         <div className="card-body">
-          <h4 className="card-title category-title">Contact details</h4>
+          <h4 className="card-title UserDetail-category-title">Contact details</h4>
           {this.createContactDetails()}
-          <h4 className="card-title category-title">Notes</h4>
-          {user.notes.map(note => <h4 className="border note">{note}</h4>)}
+          <h4 className="card-title UserDetail-category-title">Notes</h4>
+          {user.notes.map((note, index) => (
+            <h4 key={index}>
+              <textarea className="border UserDetail-note w-100" value={note} />
+            </h4>
+          ))}
         </div>
         <div className="m-3">
           <button className="btn btn-primary pull-right"> Add note</button>
@@ -80,7 +102,8 @@ export class UserDetailComponent extends Component {
 }
 
 UserDetailComponent.defaultProps = {
-  updateStatus: () => {},
+  updateStatus: () => {
+  },
   firestore: undefined
 }
 
@@ -88,11 +111,9 @@ UserDetailComponent.propTypes = {
   user: userPropTypes.isRequired,
   updateStatus: PropTypes.func,
   firestore: PropTypes.shape({ // from enhnace (withFirestore)
-    update: PropTypes.func.isRequired,
-    delete: PropTypes.func.isRequired
+    update: PropTypes.func.isRequired
   })
 }
-
 
 const UserDetail = compose(
   withFirestore,

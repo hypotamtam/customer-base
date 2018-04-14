@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import '../../Text.css'
 import User from './User'
 import userPropTypes from '../userPropTypes'
 import selectUser from '../actions/selectUser'
@@ -29,7 +28,8 @@ export class UsersComponent extends Component {
 
 UsersComponent.defaultProps = {
   selectedUserId: undefined,
-  onUserSelected: () => {}
+  onUserSelected: () => {
+  }
 }
 
 UsersComponent.propTypes = {
@@ -39,7 +39,7 @@ UsersComponent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  selectedUserId: state.selectedUserId
+  selectedUserId: state.selectedUserId && state.selectedUserId.value
 })
 
 const mapDispatchToProps = dispatch => ({
