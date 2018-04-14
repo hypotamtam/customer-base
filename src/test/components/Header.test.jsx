@@ -31,7 +31,7 @@ describe('<Header /> should ', () => {
     expect(orderButtonsWrapper).toExist()
     orderButtonsWrapper.childAt(0).simulate('click')
     expect(newSort.order).toBe(SORT_ORDER_DSC)
-    orderButtonsWrapper.childAt(0).simulate('click')
+    orderButtonsWrapper.childAt(1).simulate('click')
     expect(newSort.order).toBe(SORT_ORDER_ASC)
   })
 

@@ -46,11 +46,11 @@ export class UserDetailComponent extends Component {
         {contactDetailCouples.map((contactDetailCouple, index) => (
           <div className="row" key={index}>
             <div className="col-6">
-              <ContactDetail type={contactDetailCouple.left[0]} value={contactDetailCouple.left[1]} />
+              <ContactDetail type={contactDetailCouple.left[0]} value={contactDetailCouple.left[1]}/>
             </div>
             {contactDetailCouple.right && (
               <div className="col-6">
-                <ContactDetail type={contactDetailCouple.right[0]} value={contactDetailCouple.right[1]} />
+                <ContactDetail type={contactDetailCouple.right[0]} value={contactDetailCouple.right[1]}/>
               </div>
             )}
           </div>))}
@@ -80,7 +80,7 @@ export class UserDetailComponent extends Component {
           <h4 className="card-title UserDetail-category-title">Contact details</h4>
           {this.createContactDetails()}
           <h4 className="card-title UserDetail-category-title">Notes</h4>
-          {user.notes.map((note, index) => <Note key={index} note={note} onInputChange={value => this.props.updateNote(value, index)} />)}
+          {user.notes.map((note, index) => <Note key={index} note={note} onInputChange={value => this.props.updateNote(value, index)}/>)}
         </div>
         <div className="m-3">
           <button id="AddNoteBtn" className="btn btn-primary pull-right" onClick={this.props.addNote}> Add note</button>

@@ -28,17 +28,24 @@ export const filterUpdateReducer = (state = { text: null, status: null }, action
 
   if (action.filter) {
     const { text, status } = action.filter
-
+    let textRexExp = null
+    try {
+      if (text) {
+        textRexExp = new RegExp(text)
+      }
+    } catch (e) {
+      textRexExp = null
+    }
     let userFilter = () => true
-    if (text || status) {
+    if (textRexExp || status) {
       userFilter = (user) => {
         let shouldKeepUser = status ? user.status === status : false
         if (text) {
-          shouldKeepUser = shouldKeepUser || (user.name.firstName.match(text) != null)
-            || (user.name.lastName.match(text) != null)
-            || (user.id.match(text) != null)
-            || user.notes.find(note => note.match(text) != null) !== undefined
-            || Object.values(user.contactDetails).find(value => value.match(text) != null) !== undefined
+          shouldKeepUser = shouldKeepUser || (user.name.firstName.match(textRexExp) != null)
+            || (user.name.lastName.match(textRexExp) != null)
+            || (user.id.match(textRexExp) != null)
+            || user.notes.find(note => note.match(textRexExp) != null) !== undefined
+            || Object.values(user.contactDetails).find(value => value.match(textRexExp) != null) !== undefined
         }
         return shouldKeepUser
       }
@@ -46,6 +53,7 @@ export const filterUpdateReducer = (state = { text: null, status: null }, action
 
     return { ...action.filter, userFilter }
   }
+  return state
 }
 
 export const sortUpdateReducer = (state = { field: SORT_FIELD_NAME, order: SORT_ORDER_ASC }, action) => {

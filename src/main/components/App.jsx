@@ -24,11 +24,11 @@ export class AppComponent extends Component {
       <div className="container">
         <div className="row">
           <div className="col">
-            <Users users={users} />
+            <Users users={users}/>
           </div>
           {selectedUser &&
           <div className="col-8">
-            <UserDetail user={selectedUser} />
+            <UserDetail user={selectedUser}/>
           </div>
           }
         </div>
@@ -40,7 +40,7 @@ export class AppComponent extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Header />
+          <Header/>
         </header>
         <div className="App-body">
           {this.createUsersComponent()}

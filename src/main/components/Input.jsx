@@ -43,7 +43,7 @@ class Input extends Component {
   render() {
     return (
       <input className="form-control"
-             value={this.state.value}
+             value={this.state.value ? this.state.value : ''}
              onChange={(event) => this.onChange(event)}
              onKeyDown={(event) => this.onKeyDown(event)}
              type="text"
