@@ -16,11 +16,17 @@ export class UsersComponent extends Component {
       </li>)
   }
 
+
   render() {
+    const { users, userComparator } = this.props
+    const comparator = userComparator ? userComparator : (userA, userB) => users.indexOf(userA) - users.indexOf(userB)
+    const orderedUsers = [...this.props.users]
+      .filter(this.props.userFilter)
+      .sort(comparator)
     return (
       <div id="users">
         <ul className="list-group">
-          {this.props.users.map(user => this.createUserComponent(user))}
+          {orderedUsers.map(user => this.createUserComponent(user))}
         </ul>
       </div>)
   }
@@ -28,6 +34,8 @@ export class UsersComponent extends Component {
 
 UsersComponent.defaultProps = {
   selectedUserId: undefined,
+  userComparator: undefined,
+  userFilter: () => true,
   onUserSelected: () => {
   }
 }
@@ -35,7 +43,9 @@ UsersComponent.defaultProps = {
 UsersComponent.propTypes = {
   users: PropTypes.arrayOf(userPropTypes).isRequired,
   selectedUserId: PropTypes.string,
-  onUserSelected: PropTypes.func
+  onUserSelected: PropTypes.func,
+  userComparator: PropTypes.func,
+  userFilter: PropTypes.func
 }
 
 const mapStateToProps = state => ({

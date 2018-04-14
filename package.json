@@ -40,7 +40,10 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/main/components/**/*.{js,jsx}",
+      "src/main/**/*.{js,jsx}",
+      "!src/main/registerServiceWorker.js",
+      "!src/main/reducer.js",
+      "!src/main/store.js",
       "!<rootDir>/node_modules/",
       "!<rootDir>/path/to/dir/"
     ]

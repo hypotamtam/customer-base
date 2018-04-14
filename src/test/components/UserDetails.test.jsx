@@ -54,7 +54,6 @@ describe('<UserDetails /> should ', () => {
     const callback = () => { isCalled = true }
     const userDetailWrapper = mount(<UserDetailComponent user={usersData[0]} addNote={callback} />)
     const addNoteButtonWrapper = userDetailWrapper.find('#AddNoteBtn')
-    console.log(addNoteButtonWrapper)
     expect(addNoteButtonWrapper).toExist()
     addNoteButtonWrapper.simulate('click')
     expect(isCalled).toBe(true)
