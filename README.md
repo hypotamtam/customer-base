@@ -64,9 +64,9 @@ What is a project without a continuous integration... I set up a very simple CI 
 
 As it a short project and I was alone, I only use master. Never do that for real project! But I followed [this](https://seesparkbox.com/foundry/semantic_commit_messages) to write my commit message.
 
-##Architecture
+## Architecture
 
-###Folders
+### Folders
 
 One image is better than any explanation :
 
@@ -98,7 +98,7 @@ src
 ```
 This is clearly an early stage structure and based on my experience with other platforms. As the test and the production code base are not mixed up, it makes the thing clearer. Not chance an ugly but useful test hack goes to prod. I'm happy to change it if you prefer a better one.
 
-###Software
+### Software
 
 In case you are not familiar with `React` and `Redux`, you should start by reading these site:
 
@@ -142,7 +142,7 @@ Most of the change is done via `Redux`. The state look likes this :
 ```
 It's quite simple and doesn't need explanation. `firebase` and `firestore` are in the state because  I use [react-redux-firebase](http://react-redux-firebase.com/`). The design of this lib forces to do that. Not sure yet whether that's a good idea but it facilitates the interaction with the data store.
   
-##Road map
+## Road map
 
 List of next actions to tackle (not ordered):
 
