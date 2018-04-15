@@ -5,7 +5,7 @@ import { withFirestore } from 'react-redux-firebase'
 import { withHandlers } from 'recompose'
 import PropTypes from 'prop-types'
 import './UserDetail.css'
-import userPropTypes from '../types/userPropTypes'
+import userPropTypes, { STATUS } from '../types/userPropTypes'
 import Note from './Note'
 import ContactDetail from './ContactDetail'
 
@@ -15,6 +15,7 @@ export class UserDetailComponent extends Component {
     const selectStatusClass = 'btn btn-lg btn-primary'
     const unselectStatusClass = 'btn btn-lg btn-secondary'
     return (<button
+      key={value}
       type="button"
       className={value === status ? selectStatusClass : unselectStatusClass}
       onClick={() => this.props.updateStatus(value)}
@@ -24,9 +25,7 @@ export class UserDetailComponent extends Component {
   createStatusButtons() {
     return (
       <div className="btn-group btn-group-toggle">
-        {this.createStatusButton('prospective')}
-        {this.createStatusButton('current')}
-        {this.createStatusButton('non-active')}
+        {STATUS.map(status => this.createStatusButton(status))}
       </div>
     )
   }
